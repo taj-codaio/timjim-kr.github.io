@@ -1,0 +1,76 @@
+<html>
+<head>
+<style type="text/css">
+.specialHover {
+  border: 1px solid black;
+  font-size: 36px;
+  height: 100px;
+}
+.specialHover:hover {
+  background-color: red;
+}
+</style>
+<script type="text/javascript">
+  let mutationObserver;
+
+  function handleDOMMutation(records) {
+    console.log('***Mutation***');
+    records.forEach(record => {
+      console.log('  oldValue:', record.oldValue);
+      console.log('  newValue:', record.target.textContent);
+    });
+  }
+
+  function onLoad() {
+    const d3 = document.getElementById('d3');
+    mutationObserver = new MutationObserver(handleDOMMutation);
+    mutationObserver.observe(d3, {characterData: true, characterDataOldValue: true, subtree: true});
+    d3.addEventListener('keydown', e => { console.log('***KeyDown***'); console.log('  keyCode', e.keyCode); console.log('  key', e.key);});
+    d3.addEventListener('beforeinput', e => {console.log('***BeforeInput***'); console.log('  type', e.inputType); console.log('  data', e.data); });
+    d3.addEventListener('input', e => {console.log('***Input***'); console.log('  type', e.inputType); console.log('  data', e.data); });
+    d3.addEventListener('compositionstart', e => {console.log('***CompositionStart***'); console.log('  data:', e.data)});
+    d3.addEventListener('compositionend', e => {console.log('***CompositionEnd***'); console.log('  data:', e.data)});
+    document.addEventListener('selectionchange', e => {console.log('***SelectionChange***'); console.log('  node:', document.getSelection().focusNode.textContent); console.log('  offset:', document.getSelection().focusOffset);});
+  }
+</script>
+</head>
+<body onload="onLoad()">
+<div id="d1" contenteditable="true" style="font-size: 36px;">
+Content Editable 1
+</div>
+<div id="d2" contenteditable="true" style="font-size: 36px;">
+Content Editable 2
+</div>
+<div id="d3" contenteditable="true" style="font-size: 36px;">
+Content Editable 3
+</div>
+<div id="d4" contenteditable="true" style="font-size: 36px;">
+Content Editable 4
+</div>
+<!-- div contenteditable="true" style="font-size: 36px; user-select: text; -webkit-user-select: text;">
+Hello
+<div contenteditable="false" style="border: 1px solid red; background-color: transparent; height: 200px; -webkit-user-select: none; width: 1000px; max-width: \
+100%; display: inline-block;"></div>
+world!
+<p>
+Doner flank ham hock short ribs, swine pastrami turducken pig spare ribs prosciutto chuck tri-tip.
+<p>
+Pork loin strip steak kevin flank, drumstick burgdoggen boudin rump chuck meatball brisket.  Salami pig hamburger meatloaf chicken.  Drumstick meatball salami\
+ jerky andouille.  Salami picanha beef, frankfurter ground round landjaeger turkey cupim bresaola shoulder corned beef tail flank kielbasa meatloaf.  Porchett\
+a chuck tongue, beef ribs fatback turkey kielbasa tri-tip.  Short loin filet mignon landjaeger kielbasa pastrami flank strip steak drumstick pancetta prosciut\
+to ground round alcatra buffalo ribeye.  Pork sirloin rump, tonguDoner flank ham hock short ribs, swine pastrami turducken pig spare ribs prosciutto chuck tri\
+-tip.
+<p>
+Pork loin strip steak kevin flank, drumstick burgdoggen boudin rump chuck meatball brisket.  Salami pig hamburger meatloaf chicken.  Drumstick meatball salami\
+ jerky andouille.  Salami picanha beef, frankfurter ground round landjaeger turkey cupim bresaola shoulder corned beef tail flank kielbasa meatloaf.  Porchett\
+a chuck tongue, beef ribs fatback turkey kielbasa tri-tip.  Short loin filet mignon landjaeger kielbasa pastrami flank strip steak drumstick pancetta prosciut\
+to ground round alcatra buffalo ribeye.  Pork sirloin rump, tonguDoner flank ham hock short ribs, swine pastrami turducken pig spare ribs prosciutto chuck tri\
+-tip.
+<p>
+Pork loin strip steak kevin flank, drumstick burgdoggen boudin rump chuck meatball brisket.  Salami pig hamburger meatloaf chicken.  Drumstick meatball salami\
+ jerky andouille.  Salami picanha beef, frankfurter ground round landjaeger turkey cupim bresaola shoulder corned beef tail flank kielbasa meatloaf.  Porchett\
+a chuck tongue, beef ribs fatback turkey kielbasa tri-tip.  Short loin filet mignon landjaeger kielbasa pastrami flank strip steak drumstick pancetta prosciut\
+to ground round alcatra buffalo ribeye.  Pork sirloin rump, tongu
+</div -->
+</body>
+</html>
