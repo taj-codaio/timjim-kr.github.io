@@ -26,8 +26,8 @@
     mutationObserver = new MutationObserver(handleDOMMutation);
     mutationObserver.observe(d3, {characterData: true, characterDataOldValue: true, subtree: true});
     d3.addEventListener('keydown', e => { console.log('***KeyDown***'); console.log('  keyCode', e.keyCode); console.log('  key', e.key);});
-    d3.addEventListener('beforeinput', e => {console.log('***BeforeInput***'); console.log('  type', e.inputType); console.log('  data', e.data); });
-    d3.addEventListener('input', e => {console.log('***Input***'); console.log('  type', e.inputType); console.log('  data', e.data); });
+    d3.addEventListener('beforeinput', e => {console.log('***BeforeInput***'); console.log('  type', e.inputType); console.log('  data', e.data); console.log('  selection', document.getSelection().anchorOffset, document.getSelection().focusOffset);}});
+    d3.addEventListener('input', e => {console.log('***Input***'); console.log('  type', e.inputType); console.log('  data', e.data); console.log('  selection', document.getSelection().anchorOffset, document.getSelection().focusOffset);});
     d3.addEventListener('compositionstart', e => {console.log('***CompositionStart***'); console.log('  data:', e.data)});
     d3.addEventListener('compositionend', e => {console.log('***CompositionEnd***'); console.log('  data:', e.data)});
     document.addEventListener('selectionchange', e => {console.log('***SelectionChange***'); console.log('  node:', document.getSelection().focusNode.textContent); console.log('  offset:', document.getSelection().focusOffset);});
